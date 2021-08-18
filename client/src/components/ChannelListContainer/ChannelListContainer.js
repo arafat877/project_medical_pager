@@ -44,8 +44,8 @@ export const ChannelListContainer = (props) => {
         <ChannelSearch />
         <ChannelList
           channelRenderFilterFn={customChannelTeamFilter}
-          filters={filters[0]}
-          options={options}
+          // filters={filters[0]}
+          // options={options}
           sort={sort}
           List={(listProps) => (
             <TeamChannelList
@@ -64,8 +64,8 @@ export const ChannelListContainer = (props) => {
         />
         <ChannelList
           channelRenderFilterFn={customChannelMessagingFilter}
-          filters={filters[1]}
-          options={options}
+          // filters={filters[1]}
+          // options={options}
           setActiveChannelOnMount={false}
           sort={sort}
           List={(listProps) => (

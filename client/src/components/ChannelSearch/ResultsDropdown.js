@@ -45,14 +45,7 @@ const SearchResult = (props) => {
   );
 };
 
-export const ResultsDropdown = ({
-  teamChannels,
-  directChannels,
-  focusedId,
-  loading,
-  setChannel,
-  setQuery,
-}) => {
+export const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, setChannel, setQuery }) => {
   document.addEventListener('click', () => setQuery(''));
 
   return (

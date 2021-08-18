@@ -1,10 +1,9 @@
 import React from 'react';
 
-export const CloseThreadIcon = ({ closeThread, setPinsOpen }) => (
+export const CloseThreadIcon = ({ closeThread }) => (
   <div
     onClick={(e) => {
       closeThread(e);
-      setPinsOpen(false);
     }}
     className='close-thread-icon'
   >

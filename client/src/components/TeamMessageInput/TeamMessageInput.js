@@ -11,8 +11,6 @@ import {
 
 import './TeamMessageInput.css';
 
-import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
-
 import { GiphyContext } from '../ChannelContainer/ChannelInner';
 
 import {
@@ -26,7 +24,6 @@ import {
 } from '../../assets';
 
 export const TeamMessageInput = (props) => {
-  const { pinsOpen } = props;
 
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
@@ -122,7 +119,7 @@ export const TeamMessageInput = (props) => {
   );
 
   return (
-    <div className={`team-message-input__wrapper ${(!!thread || pinsOpen) && 'thread-open'}`}>
+    <div className={`team-message-input__wrapper ${(!!thread) && 'thread-open'}`}>
       <ImageDropzone
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
@@ -167,7 +164,6 @@ export const TeamMessageInput = (props) => {
           </div>
         </div>
       </ImageDropzone>
-      <TeamTypingIndicator type='input' />
       <EmojiPicker />
     </div>
   );

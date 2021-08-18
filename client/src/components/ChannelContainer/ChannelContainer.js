@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Channel, useChatContext } from 'stream-chat-react';
 
 import './ChannelContainer.css';
 
 import { ChannelInner } from './ChannelInner';
 
-import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
@@ -14,7 +13,7 @@ import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 import { CloseThreadIcon } from '../../assets';
 
 const ThreadHeader = (props) => {
-  const { closeThread, setPinsOpen, thread } = props;
+  const { closeThread, thread } = props;
 
   const getReplyCount = () => {
     if (!thread?.reply_count) return '';
@@ -28,7 +27,7 @@ const ThreadHeader = (props) => {
         <p className='custom-thread-header__left-title'>Thread</p>
         <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
       </div>
-      <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
+      <CloseThreadIcon {...{ closeThread }} />
     </div>
   );
 };
@@ -37,8 +36,6 @@ export const ChannelContainer = (props) => {
   const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
   const { channel } = useChatContext();
-
-  const [pinsOpen, setPinsOpen] = useState(false);
 
   if (isCreating) {
     const filters = {};
@@ -67,28 +64,20 @@ export const ChannelContainer = (props) => {
     );
   }
 
+  const EmptyState = () => (
+    <div className='channel-empty__container'>
+      <p className='channel-empty__first'>This is the beginning of your chat history.</p>
+      <p className='channel-empty__second'>Send messages, attachments, links, emojis, and more.</p>
+    </div>
+  );
+
   return (
     <div className='channel__container'>
       <Channel
-        EmptyStateIndicator={ChannelEmptyState}
+        EmptyStateIndicator={EmptyState}
         Input={TeamMessageInput}
-        Message={(messageProps, i) => (
-          <TeamMessage
-            key={i}
-            {...messageProps}
-            {...{ setPinsOpen }}
-          />
-        )}
-        ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />}
-        TypingIndicator={() => null}
-      >
-        <ChannelInner
-          {...{
-            pinsOpen,
-            setIsEditing,
-            setPinsOpen,
-          }}
-        />
+        Message={(messageProps, i) => <TeamMessage key={i} {...messageProps} /> } >
+        <ChannelInner setIsEditing={setIsEditing} />
       </Channel>
     </div>
   );

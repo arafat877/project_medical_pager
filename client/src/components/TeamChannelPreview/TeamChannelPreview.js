@@ -3,8 +3,6 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelPreview.css';
 
-import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
-
 export const TeamChannelPreview = (props) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
@@ -31,7 +29,6 @@ export const TeamChannelPreview = (props) => {
             size={24}
           />
           <p>{members[0]?.user.name || members[0]?.user.id || defaultName}</p>
-          <TeamTypingIndicator type='list' />
         </div>
       );
     }
