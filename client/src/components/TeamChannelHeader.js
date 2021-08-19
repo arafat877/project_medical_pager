@@ -1,10 +1,9 @@
 import React from 'react';
 import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
-import { ChannelInfo } from '../../assets';
-import './TeamChannelHeader.css';
+import { ChannelInfo } from '../assets';
 
-export const TeamChannelHeader = ({ setIsEditing }) => {
+const TeamChannelHeader = ({ setIsEditing }) => {
   const { channel, watcher_count } = useChannelStateContext();
   const { closeThread } = useChannelActionContext();
   const { client } = useChatContext();
@@ -53,3 +52,5 @@ export const TeamChannelHeader = ({ setIsEditing }) => {
     </div>
   );
 };
+
+export default TeamChannelHeader;

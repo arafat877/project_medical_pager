@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { useChatContext } from 'stream-chat-react';
 
-import './EditChannel.css';
-
-import { UserList } from '../CreateChannel/UserList';
-
-import { CloseCreateChannel } from '../../assets';
+import { UserList } from './';
+import { CloseCreateChannel } from '../assets';
 
 const ChannelNameInput = (props) => {
   const { channelName = '', setChannelName } = props;
@@ -24,7 +21,7 @@ const ChannelNameInput = (props) => {
   );
 };
 
-export const EditChannel = (props) => {
+const EditChannel = (props) => {
   const { filters, setIsEditing } = props;
   const { channel } = useChatContext();
 
@@ -66,3 +63,5 @@ export const EditChannel = (props) => {
     </div>
   );
 };
+
+export default EditChannel;

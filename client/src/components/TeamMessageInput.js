@@ -1,39 +1,13 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-import {
-  ChatAutoComplete,
-  EmojiPicker,
-  UploadsPreview,
-  useChannelStateContext,
-  useChatContext,
-  useMessageInputContext,
-} from 'stream-chat-react';
+import { ChatAutoComplete, EmojiPicker, UploadsPreview, useChannelStateContext, useChatContext, useMessageInputContext } from 'stream-chat-react';
 
-import './TeamMessageInput.css';
+import { BoldIcon, CodeSnippet, ItalicsIcon, LightningBoltSmall, SendButton, SmileyFace, StrikeThroughIcon } from '../assets';
+import { GiphyContext } from './ChannelInner';
 
-import { GiphyContext } from '../ChannelContainer/ChannelInner';
-
-import {
-  BoldIcon,
-  CodeSnippet,
-  ItalicsIcon,
-  LightningBoltSmall,
-  SendButton,
-  SmileyFace,
-  StrikeThroughIcon,
-} from '../../assets';
-
-export const TeamMessageInput = (props) => {
-
+const TeamMessageInput = (props) => {
+  const { acceptedFiles, channel, maxNumberOfFiles, multipleUploads, thread } = useChannelStateContext();
   const { giphyState, setGiphyState } = useContext(GiphyContext);
-
-  const {
-    acceptedFiles,
-    channel,
-    maxNumberOfFiles,
-    multipleUploads,
-    thread,
-  } = useChannelStateContext();
   const { client } = useChatContext();
 
   const [boldState, setBoldState] = useState(false);
@@ -168,3 +142,5 @@ export const TeamMessageInput = (props) => {
     </div>
   );
 };
+
+export default TeamMessageInput;

@@ -1,17 +1,10 @@
 import React, { useCallback, useContext } from 'react';
 import { ChatAutoComplete, EmojiPicker, useMessageInputContext } from 'stream-chat-react';
 
-import './ThreadMessageInput.css';
+import { GiphyContext } from './ChannelInner';
+import { LightningBoltSmall, SendButton, SmileyFace } from '../assets';
 
-import { GiphyContext } from '../ChannelContainer/ChannelInner';
-
-import {
-  LightningBoltSmall,
-  SendButton,
-  SmileyFace,
-} from '../../assets';
-
-export const ThreadMessageInput = (props) => {
+const ThreadMessageInput = (props) => {
   const { giphyState, setGiphyState } = useContext(GiphyContext)
 
   const messageInput = useMessageInputContext();
@@ -64,3 +57,5 @@ export const ThreadMessageInput = (props) => {
     </div>
   );
 };
+
+export default ThreadMessageInput;

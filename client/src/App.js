@@ -7,8 +7,7 @@ import './App.css';
 
 import { getRandomImage } from './assets';
 import { useChecklist } from './ChecklistTasks';
-import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
-import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
+import { ChannelContainer, ChannelListContainer } from './components';
 
 import Auth from './components/Auth/Auth';
 

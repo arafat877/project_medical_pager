@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-import './UserList.css';
-
-import { InviteIcon } from '../../assets';
+import { InviteIcon } from '../assets';
 
 const ListContainer = (props) => {
   const { children } = props;
@@ -63,7 +61,7 @@ const UserItem = (props) => {
   );
 };
 
-export const UserList = (props) => {
+const UserList = (props) => {
   const { filters, setSelectedUsers } = props;
 
   const { client } = useChatContext();
@@ -129,3 +127,5 @@ export const UserList = (props) => {
     </ListContainer>
   );
 };
+
+export default UserList;

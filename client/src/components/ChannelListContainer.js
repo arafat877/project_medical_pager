@@ -1,13 +1,8 @@
 import React from 'react';
 import { ChannelList } from 'stream-chat-react';
 
-import './ChannelListContainer.css';
-
-import { ChannelSearch } from '../ChannelSearch/ChannelSearch';
-import { TeamChannelList } from '../TeamChannelList/TeamChannelList';
-import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';
-
-import HospitalIcon from '../../assets/hospital.png'
+import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
+import HospitalIcon from '../assets/hospital.png'
 
 const SideBar = () => (
   <div className='channel-list__sidebar'>
@@ -33,7 +28,7 @@ const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === 'messaging');
 };
 
-export const ChannelListContainer = (props) => {
+const ChannelListContainer = (props) => {
   const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
 
   return (
@@ -87,3 +82,5 @@ export const ChannelListContainer = (props) => {
     </div>
   );
 };
+
+export default ChannelListContainer;

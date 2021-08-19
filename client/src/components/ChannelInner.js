@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { logChatPromiseExecution } from 'stream-chat';
-
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext } from 'stream-chat-react';
 
-import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
-import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
+import { ThreadMessageInput, TeamChannelHeader } from './';
 
 export const GiphyContext = React.createContext({});
 
-export const ChannelInner = ({ setIsEditing }) => {
+const ChannelInner = ({ setIsEditing }) => {
   const [giphyState, setGiphyState] = useState(false);
 
   const giphyStateObj = { giphyState: giphyState, setGiphyState };
@@ -49,3 +47,5 @@ export const ChannelInner = ({ setIsEditing }) => {
     </GiphyContext.Provider>
   );
 };
+
+export default ChannelInner;

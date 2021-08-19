@@ -1,10 +1,8 @@
 import React from 'react';
 
-import './TeamChannelList.css';
+import { AddChannel } from '../assets';
 
-import { AddChannel } from '../../assets';
-
-const ChannelList = (props) => {
+const TeamChannelList = (props) => {
   const {
     children,
     error = false,
@@ -51,4 +49,4 @@ const ChannelList = (props) => {
   );
 };
 
-export const TeamChannelList = React.memo(ChannelList);
+export default TeamChannelList;

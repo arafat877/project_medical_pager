@@ -1,38 +1,30 @@
 import React from 'react';
 import { Channel, useChatContext } from 'stream-chat-react';
 
-import './ChannelContainer.css';
+import { ChannelInner, CreateChannel, EditChannel, TeamMessage, TeamMessageInput } from './';
+// import { CloseThreadIcon } from '../assets';
 
-import { ChannelInner } from './ChannelInner';
+// const ThreadHeader = (props) => {
+//   const { closeThread, thread } = props;
 
-import { CreateChannel } from '../CreateChannel/CreateChannel';
-import { EditChannel } from '../EditChannel/EditChannel';
-import { TeamMessage } from '../TeamMessage/TeamMessage';
-import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
+//   const getReplyCount = () => {
+//     if (!thread?.reply_count) return '';
+//     if (thread.reply_count === 1) return '1 reply';
+//     return `${thread.reply_count} Replies`;
+//   };
 
-import { CloseThreadIcon } from '../../assets';
+//   return (
+//     <div className='custom-thread-header'>
+//       <div className='custom-thread-header__left'>
+//         <p className='custom-thread-header__left-title'>Thread</p>
+//         <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
+//       </div>
+//       <CloseThreadIcon {...{ closeThread }} />
+//     </div>
+//   );
+// };
 
-const ThreadHeader = (props) => {
-  const { closeThread, thread } = props;
-
-  const getReplyCount = () => {
-    if (!thread?.reply_count) return '';
-    if (thread.reply_count === 1) return '1 reply';
-    return `${thread.reply_count} Replies`;
-  };
-
-  return (
-    <div className='custom-thread-header'>
-      <div className='custom-thread-header__left'>
-        <p className='custom-thread-header__left-title'>Thread</p>
-        <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
-      </div>
-      <CloseThreadIcon {...{ closeThread }} />
-    </div>
-  );
-};
-
-export const ChannelContainer = (props) => {
+const ChannelContainer = (props) => {
   const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
   const { channel } = useChatContext();
@@ -82,3 +74,5 @@ export const ChannelContainer = (props) => {
     </div>
   );
 };
+
+export default ChannelContainer;

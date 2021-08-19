@@ -1,9 +1,7 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-import './TeamChannelPreview.css';
-
-export const TeamChannelPreview = (props) => {
+const TeamChannelPreview = (props) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
   const { channel: activeChannel, client } = useChatContext();
@@ -72,3 +70,5 @@ export const TeamChannelPreview = (props) => {
     </div>
   );
 };
+
+export default TeamChannelPreview;

@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { useChatContext } from 'stream-chat-react';
 
-import './CreateChannel.css';
-
-import { UserList } from './UserList';
-
-import { CloseCreateChannel } from '../../assets';
+import { UserList } from './';
+import { CloseCreateChannel } from '../assets';
 
 const ChannelNameInput = (props) => {
   const { channelName = '', setChannelName } = props;
@@ -29,7 +26,7 @@ const ChannelNameInput = (props) => {
   );
 };
 
-export const CreateChannel = (props) => {
+const CreateChannel = (props) => {
   const { createType, filters, setIsCreating } = props;
 
   const { client, setActiveChannel } = useChatContext();
@@ -72,3 +69,5 @@ export const CreateChannel = (props) => {
     </div>
   );
 };
+
+export default CreateChannel;
