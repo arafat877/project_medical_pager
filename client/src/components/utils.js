@@ -1,6 +1,4 @@
-export const channelByUser = async (props) => {
-  const { client, setActiveChannel, channel } = props;
-
+export const channelByUser = async ({ client, setActiveChannel, channel }) => {
   const filters = {
     type: 'messaging',
     member_count: 2,

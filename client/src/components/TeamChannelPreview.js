@@ -1,9 +1,7 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-const TeamChannelPreview = (props) => {
-  const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
-
+const TeamChannelPreview = ({ channel, setActiveChannel, setIsCreating, setIsEditing, type }) => {
   const { channel: activeChannel, client } = useChatContext();
 
   const ChannelPreview = () => (
@@ -16,7 +14,6 @@ const TeamChannelPreview = (props) => {
     const members = Object.values(channel.state.members).filter(
       ({ user }) => user.id !== client.userID,
     );
-    const defaultName = 'Johnny Blaze';
 
     if (!members.length || members.length === 1) {
       return (
@@ -26,7 +23,7 @@ const TeamChannelPreview = (props) => {
             name={members[0]?.user.name || members[0]?.user.id}
             size={24}
           />
-          <p>{members[0]?.user.name || members[0]?.user.id || defaultName}</p>
+          <p>{members[0]?.user.name || members[0]?.user.id}</p>
         </div>
       );
     }

@@ -4,9 +4,7 @@ import { Channel, useChatContext } from 'stream-chat-react';
 import { ChannelInner, CreateChannel, EditChannel, TeamMessage, TeamMessageInput } from './';
 // import { CloseThreadIcon } from '../assets';
 
-// const ThreadHeader = (props) => {
-//   const { closeThread, thread } = props;
-
+// const ThreadHeader = ({ closeThread, thread }) => {
 //   const getReplyCount = () => {
 //     if (!thread?.reply_count) return '';
 //     if (thread.reply_count === 1) return '1 reply';
@@ -24,9 +22,7 @@ import { ChannelInner, CreateChannel, EditChannel, TeamMessage, TeamMessageInput
 //   );
 // };
 
-const ChannelContainer = (props) => {
-  const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
-
+const ChannelContainer = ({ createType, isCreating, isEditing, setIsCreating, setIsEditing }) => {
   const { channel } = useChatContext();
 
   if (isCreating) {

@@ -28,9 +28,7 @@ const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === 'messaging');
 };
 
-const ChannelListContainer = (props) => {
-  const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
-
+const ChannelListContainer = ({ filters, options, setCreateType, setIsCreating, setIsEditing, sort }) => {
   return (
     <div className='channel-list__container'>
       <SideBar />

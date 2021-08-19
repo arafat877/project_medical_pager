@@ -2,17 +2,7 @@ import React from 'react';
 
 import { AddChannel } from '../assets';
 
-const TeamChannelList = (props) => {
-  const {
-    children,
-    error = false,
-    loading,
-    setCreateType,
-    setIsCreating,
-    setIsEditing,
-    type,
-  } = props;
-
+const TeamChannelList = ({ children, error = false, loading, setCreateType, setIsCreating, setIsEditing, type }) => {
   if (error) {
     return type === 'team' ? (
       <div className='team-channel-list'>

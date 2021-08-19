@@ -3,9 +3,7 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { InviteIcon } from '../assets';
 
-const ListContainer = (props) => {
-  const { children } = props;
-
+const ListContainer = ({ children }) => {
   return (
     <div className='user-list__container'>
       <div className='user-list__header'>
@@ -18,9 +16,7 @@ const ListContainer = (props) => {
   );
 };
 
-const UserItem = (props) => {
-  const { index, setSelectedUsers, user } = props;
-
+const UserItem = ({ index, setSelectedUsers, user }) => {
   const [selected, setSelected] = useState(false);
 
   const getLastActive = (i) => {
@@ -61,9 +57,7 @@ const UserItem = (props) => {
   );
 };
 
-const UserList = (props) => {
-  const { filters, setSelectedUsers } = props;
-
+const UserList = ({ filters, setSelectedUsers }) => {
   const { client } = useChatContext();
 
   const [error, setError] = useState(false);

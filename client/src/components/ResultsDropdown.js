@@ -3,9 +3,7 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { channelByUser } from './utils';
 
-const SearchResult = (props) => {
-  const { channel, focusedId, type, setChannel } = props;
-
+const SearchResult = ({ channel, focusedId, type, setChannel }) => {
   const { client, setActiveChannel } = useChatContext();
 
   if (type === 'channel') {
@@ -38,7 +36,7 @@ const SearchResult = (props) => {
       <div className='channel-search__result-user'>
         <Avatar image={channel.image || undefined} name={channel.name || channel.id} size={24} />
         <p className='channel-search__result-text'>
-          {channel.name || channel.id || 'Johnny Blaze'}
+          {channel.name || channel.id}
         </p>
       </div>
     </div>

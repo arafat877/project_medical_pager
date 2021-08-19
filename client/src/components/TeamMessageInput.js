@@ -32,7 +32,7 @@ const TeamMessageInput = (props) => {
     );
 
     if (!members.length || members.length === 1) {
-      return members[0]?.user.name || members[0]?.user.id || 'Johnny Blaze';
+      return members[0]?.user.name || members[0]?.user.id;
     }
 
     return 'the group';
