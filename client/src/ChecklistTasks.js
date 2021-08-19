@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-const notifyParent = (parent) => (message) => {
-  window.parent.postMessage(message, parent);
+const notifyParent = () => (message) => {
+  window.parent.postMessage(message);
 };
 
 const YOUTUBE_LINK = 'https://youtu.be/Ujvy-DEA-UM';
@@ -16,9 +16,9 @@ const [REACT_TO_MESSAGE, RUN_GIPHY, SEND_YOUTUBE, DRAG_DROP, START_THREAD, SEND_
   'send-message',
 ];
 
-export const useChecklist = (chatClient, targetOrigin) => {
+export const useChecklist = (chatClient) => {
   useEffect(() => {
-    const notify = notifyParent(targetOrigin);
+    const notify = notifyParent();
     const handleNewEvent = ({ type, message }) => {
       switch (type) {
         case 'reaction.new':
@@ -53,5 +53,5 @@ export const useChecklist = (chatClient, targetOrigin) => {
       chatClient.on(handleNewEvent);
     }
     return () => chatClient?.off(handleNewEvent);
-  }, [chatClient, targetOrigin]);
+  }, [chatClient]);
 };
