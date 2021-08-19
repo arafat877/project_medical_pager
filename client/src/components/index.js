@@ -12,3 +12,4 @@ export { default as TeamMessage } from './TeamMessage';
 export { default as TeamMessageInput } from './TeamMessageInput';
 export { default as ThreadMessageInput } from './ThreadMessageInput';
 export { default as UserList } from './UserList';
+export { default as Auth } from './Auth/Auth';

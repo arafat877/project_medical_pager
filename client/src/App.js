@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
+import { Chat } from 'stream-chat-react';
+import Cookies from 'universal-cookie';
 
-import 'stream-chat-react/dist/css/index.css';
-import './App.css';
 
 import { getRandomImage } from './assets';
 import { useChecklist } from './ChecklistTasks';
-import { ChannelContainer, ChannelListContainer } from './components';
+import { ChannelContainer, ChannelListContainer, Auth } from './components';
 
-import Auth from './components/Auth/Auth';
-
-import Cookies from 'universal-cookie';
+import 'stream-chat-react/dist/css/index.css';
+import './App.css';
 
 const cookies = new Cookies();
 const urlParams = new URLSearchParams(window.location.search);
@@ -24,21 +22,6 @@ const userToken = cookies.get('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
 const hashedPassword = cookies.get('hashedPassword');
 const isAuth = cookies.get('isAuth');
 const targetOrigin = urlParams.get('target_origin');
-
-const i18nInstance = new Streami18n({
-  language: 'en',
-  translationsForLanguage: {
-    ...enTranslations,
-  },
-});
-
-const filters = [
-  { type: 'team', demo: 'team' },
-  { type: 'messaging', demo: 'team' },
-];
-
-const options = { state: true, watch: true, presence: true, limit: 3 };
-const sort = { last_message_at: -1, updated_at: -1 };
 
 const client = StreamChat.getInstance(apiKey);
 
@@ -81,15 +64,12 @@ const App = () => {
   return (
     <>
       <div className='app__wrapper'>
-        <Chat client={client} i18nInstance={i18nInstance} theme={`team ${theme}`}>
+        <Chat client={client} theme={`team ${theme}`}>
           <ChannelListContainer
               isCreating={isCreating}
-              filters={filters}
-              options={options}
               setCreateType={setCreateType}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
-              sort={sort}
           />
           <ChannelContainer
               createType={createType}

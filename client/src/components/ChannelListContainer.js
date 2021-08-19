@@ -28,7 +28,7 @@ const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === 'messaging');
 };
 
-const ChannelListContainer = ({ filters, options, setCreateType, setIsCreating, setIsEditing, sort }) => {
+const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) => {
   return (
     <div className='channel-list__container'>
       <SideBar />
@@ -37,9 +37,9 @@ const ChannelListContainer = ({ filters, options, setCreateType, setIsCreating, 
         <ChannelSearch />
         <ChannelList
           channelRenderFilterFn={customChannelTeamFilter}
-          // filters={filters[0]}
-          // options={options}
-          sort={sort}
+          // filters={{ type: 'team', demo: 'team' }}
+          // options={{ state: true, watch: true, presence: true, limit: 3 }}
+          // sort={{ last_message_at: -1, updated_at: -1 }}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}
@@ -60,7 +60,7 @@ const ChannelListContainer = ({ filters, options, setCreateType, setIsCreating, 
           // filters={filters[1]}
           // options={options}
           setActiveChannelOnMount={false}
-          sort={sort}
+          // sort={{ last_message_at: -1, updated_at: -1 }}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}

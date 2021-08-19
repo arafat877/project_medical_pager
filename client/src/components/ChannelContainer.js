@@ -2,25 +2,6 @@ import React from 'react';
 import { Channel, useChatContext } from 'stream-chat-react';
 
 import { ChannelInner, CreateChannel, EditChannel, TeamMessage, TeamMessageInput } from './';
-// import { CloseThreadIcon } from '../assets';
-
-// const ThreadHeader = ({ closeThread, thread }) => {
-//   const getReplyCount = () => {
-//     if (!thread?.reply_count) return '';
-//     if (thread.reply_count === 1) return '1 reply';
-//     return `${thread.reply_count} Replies`;
-//   };
-
-//   return (
-//     <div className='custom-thread-header'>
-//       <div className='custom-thread-header__left'>
-//         <p className='custom-thread-header__left-title'>Thread</p>
-//         <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
-//       </div>
-//       <CloseThreadIcon {...{ closeThread }} />
-//     </div>
-//   );
-// };
 
 const ChannelContainer = ({ createType, isCreating, isEditing, setIsCreating, setIsEditing }) => {
   const { channel } = useChatContext();
