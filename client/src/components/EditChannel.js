@@ -5,7 +5,6 @@ import { UserList } from './';
 import { CloseCreateChannel } from '../assets';
 
 const ChannelNameInput = ({ channelName = '', setChannelName }) => {
-
   const handleChange = (event) => {
     event.preventDefault();
     setChannelName(event.target.value);
@@ -22,8 +21,7 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
 
 const EditChannel = ({ filters, setIsEditing }) => {
   const { channel } = useChatContext();
-
-  const [channelName, setChannelName] = useState(channel?.data.name || channel?.data.id);
+  const [channelName, setChannelName] = useState(channel?.data.name);
   const [selectedUsers, setSelectedUsers] = useState([]);
 
   const updateChannel = async (event) => {
@@ -32,10 +30,7 @@ const EditChannel = ({ filters, setIsEditing }) => {
     const nameChanged = channelName !== (channel.data.name || channel.data.id);
 
     if (nameChanged) {
-      await channel.update(
-        { name: channelName },
-        { text: `Channel name changed to ${channelName}` },
-      );
+      await channel.update({ name: channelName },{ text: `Channel name changed to ${channelName}` });
     }
 
     if (selectedUsers.length) {
@@ -51,10 +46,10 @@ const EditChannel = ({ filters, setIsEditing }) => {
     <div className='edit-channel__container'>
       <div className='edit-channel__header'>
         <p>Edit Channel</p>
-        <CloseCreateChannel {...{ setIsEditing }} />
+        <CloseCreateChannel setIsEditing={setIsEditing} />
       </div>
-      <ChannelNameInput {...{ channelName, setChannelName }} />
-      <UserList {...{ filters, setSelectedUsers }} />
+      <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />
+      <UserList filters={filters} setSelectedUsers={setSelectedUsers} />
       <div className='edit-channel__button-wrapper' onClick={updateChannel}>
         <p>Save Changes</p>
       </div>

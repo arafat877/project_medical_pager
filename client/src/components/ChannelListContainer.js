@@ -37,41 +37,41 @@ const ChannelListContainer = ({ setCreateType, setIsCreating, setIsEditing }) =>
         <ChannelSearch />
         <ChannelList
           channelRenderFilterFn={customChannelTeamFilter}
-          // filters={{ type: 'team', demo: 'team' }}
-          // options={{ state: true, watch: true, presence: true, limit: 3 }}
-          // sort={{ last_message_at: -1, updated_at: -1 }}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}
-              {...{ setCreateType, setIsCreating, setIsEditing }}
+              setCreateType={setCreateType}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
               type='team'
             />
           )}
           Preview={(previewProps) => (
             <TeamChannelPreview
               {...previewProps}
-              {...{ setIsCreating, setIsEditing }}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
               type='team'
             />
           )}
         />
         <ChannelList
           channelRenderFilterFn={customChannelMessagingFilter}
-          // filters={filters[1]}
-          // options={options}
           setActiveChannelOnMount={false}
-          // sort={{ last_message_at: -1, updated_at: -1 }}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}
-              {...{ setCreateType, setIsCreating, setIsEditing }}
+              setCreateType={setCreateType}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}              
               type='messaging'
             />
           )}
           Preview={(previewProps) => (
             <TeamChannelPreview
               {...previewProps}
-              {...{ setIsCreating, setIsEditing }}
+              setIsCreating={setIsCreating}
+              setIsEditing={setIsEditing}
               type='messaging'
             />
           )}

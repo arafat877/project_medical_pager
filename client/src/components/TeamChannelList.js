@@ -30,7 +30,9 @@ const TeamChannelList = ({ children, error = false, loading, setCreateType, setI
           {type === 'team' ? 'Channels' : 'Direct Messages'}
         </p>
         <AddChannel
-          {...{ setCreateType, setIsCreating, setIsEditing }}
+          setCreateType={setCreateType}
+          setIsCreating={setIsCreating}
+          setIsEditing={setIsEditing} 
           type={type === 'team' ? 'team' : 'messaging'}
         />
       </div>

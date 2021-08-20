@@ -48,8 +48,8 @@ const UserItem = ({ index, setSelectedUsers, user }) => {
   return (
     <div className='user-item__wrapper' onClick={handleClick}>
       <div className='user-item__name-wrapper'>
-        <Avatar image={user.image} name={user.name || user.id} size={32} />
-        <p className='user-item__name'>{user.name || user.id}</p>
+        <Avatar image={user.image} name={user.fullName || user.id} size={32} />
+        <p className='user-item__name'>{user.fullName || user.id}</p>
       </div>
       <p className='user-item__last-active'>{getLastActive(index)}</p>
       {selected ? <InviteIcon /> : <div className='user-item__invite-empty' />}

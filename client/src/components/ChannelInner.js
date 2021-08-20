@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
 import { MessageList, MessageInput, Thread, Window, useChannelActionContext } from 'stream-chat-react';
 
-import { ThreadMessageInput, TeamChannelHeader } from './';
+import { TeamChannelHeader } from './';
 
 export const GiphyContext = React.createContext({});
 
 const ChannelInner = ({ setIsEditing }) => {
   const [giphyState, setGiphyState] = useState(false);
-
-  const giphyStateObj = { giphyState: giphyState, setGiphyState };
-
   const { sendMessage } = useChannelActionContext();
-
+  
   const overrideSubmitHandler = (message) => {
     let updatedMessage = {
       attachments: message.attachments,
@@ -21,28 +17,26 @@ const ChannelInner = ({ setIsEditing }) => {
       parent: message.parent,
       text: message.text,
     };
-
+    
     if (giphyState) {
-      const updatedText = `/giphy ${message.text}`;
-      updatedMessage = { ...updatedMessage, text: updatedText };
+      updatedMessage = { ...updatedMessage, text: `/giphy ${message.text}` };
     }
-
+    
     if (sendMessage) {
-      const sendMessagePromise = sendMessage(updatedMessage);
-      logChatPromiseExecution(sendMessagePromise, 'send message');
+      sendMessage(updatedMessage);
       setGiphyState(false);
     }
   };
 
   return (
-    <GiphyContext.Provider value={giphyStateObj}>
+    <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
       <div style={{ display: 'flex', width: '100%' }}>
         <Window>
-          <TeamChannelHeader {...{ setIsEditing }} />
-          <MessageList disableQuotedMessages />
-          <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
+          <TeamChannelHeader setIsEditing={setIsEditing} />
+          <MessageList />
+          <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
-        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput }} />
+        <Thread />
       </div>
     </GiphyContext.Provider>
   );

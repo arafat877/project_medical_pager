@@ -9,7 +9,10 @@ const TeamMessage = (props) => {
   };
 
   return (
-      <MessageTeam  message={message} handleOpenThread={handleOpenThreadOverride} />
+      <MessageTeam 
+        message={{...message, user: {...message.user, name: message.user.fullName} }} 
+        handleOpenThread={handleOpenThreadOverride} 
+      />
   );
 };
 
