@@ -284,6 +284,7 @@ body {
   border-radius: 8px;
   margin-bottom: 8px;
   border: 1px solid transparent;
+  width: 95%;
 }
 
 .channel-search__input__wrapper:focus-within {
@@ -307,6 +308,8 @@ body {
 
 ::placeholder {
   color: rgba(255, 255, 255, 0.66);
+  white-space: nowrap;
+  width: 150px;
 }
 
 .channel-search__results {
@@ -730,6 +733,8 @@ body {
 
 .team-channel-list {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .team-channel-list__message {
@@ -1521,6 +1526,11 @@ div.rta__autocomplete.str-chat__emojisearch {
   transition: 0.8s ease;
 }
 
+.str-chat__input-flat {
+  width: 100%;
+  padding: 10px;
+}
+
 @media screen and (max-width: 960px) {
 
   .channel-list__container {
@@ -1548,6 +1558,43 @@ div.rta__autocomplete.str-chat__emojisearch {
 
   .channerl-list__container-toggle {
     display: flex;
-    
+  }
+
+  .channel-search__input__wrapper {
+    width: 90%;
+    padding-left: 10px;
+    justify-content: flex-start;
+  }
+
+  .channel-search__input__text {
+    width: inherit;
+  }
+
+  .channel-preview__item.multi {
+    width: 80%;
+  }
+  
+}
+
+@media screen and (max-width: 650px) {
+  .channerl-list__container-toggle {
+    right: -3%;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .channel-preview__item.multi {
+    width: 150px;
+  }
+
+  .channerl-list__container-toggle {
+    right: -5%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .channel-list__sidebar {
+    display: none;
   }
 }
