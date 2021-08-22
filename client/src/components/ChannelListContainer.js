@@ -28,7 +28,7 @@ const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === "messaging");
 };
 
-const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing }) => {
+const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing, setToggleContainer }) => {
   return (
     <>
       <SideBar />
@@ -43,6 +43,7 @@ const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing }) => {
               setCreateType={setCreateType}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer ? setToggleContainer : null}
               type="team"
             />
           )}
@@ -51,6 +52,7 @@ const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing }) => {
               {...previewProps}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer ? setToggleContainer : null}
               type="team"
             />
           )}
@@ -64,6 +66,7 @@ const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing }) => {
               setCreateType={setCreateType}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer ? setToggleContainer : null}
               type="messaging"
             />
           )}
@@ -72,6 +75,7 @@ const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing }) => {
               {...previewProps}
               setIsCreating={setIsCreating}
               setIsEditing={setIsEditing}
+              setToggleContainer={setToggleContainer ? setToggleContainer : null}
               type="messaging"
             />
           )}
@@ -108,13 +112,12 @@ const ChannelListContainer = ({
           className="channerl-list__container-toggle"
           onClick={() => setToggleContainer(!toggleContainer)}
         ></div>
-        {toggleContainer ? (
           <ChannelListContent
             setCreateType={setCreateType}
             setIsCreating={setIsCreating}
             setIsEditing={setIsEditing}
+            setToggleContainer={setToggleContainer}
           />
-        ) : null}
       </div>
     </>
   );
