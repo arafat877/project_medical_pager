@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-const channelByUser = async ({ client, setActiveChannel, channel }) => {
+const channelByUser = async ({ client, setActiveChannel, channel, setChannel }) => {
   const filters = {
     type: 'messaging',
     member_count: 2,
@@ -13,17 +13,21 @@ const channelByUser = async ({ client, setActiveChannel, channel }) => {
   if (existingChannel) return setActiveChannel(existingChannel);
 
   const newChannel = client.channel('messaging', { members: [channel.id, client.userID || ''] });
+  setChannel(newChannel)
 
   return setActiveChannel(newChannel);
 };
 
-const SearchResult = ({ channel, focusedId, type, setChannel }) => {
+const SearchResult = ({ channel, focusedId, type, setChannel, setToggleContainer }) => {
   const { client, setActiveChannel } = useChatContext();
 
   if (type === 'channel') {
     return (
       <div
-        onClick={() => setChannel(channel)}
+        onClick={() => {
+          setChannel(channel)
+          setToggleContainer ? setToggleContainer((prevState) => !prevState) : null
+        }}
         className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container' }
       >
         <div className='result-hashtag'>#</div>
@@ -34,7 +38,10 @@ const SearchResult = ({ channel, focusedId, type, setChannel }) => {
 
   return (
     <div
-      onClick={async () => channelByUser({ client, setActiveChannel, channel })}
+      onClick={async () => {
+        channelByUser({ client, setActiveChannel, channel, setChannel })
+        setToggleContainer ? setToggleContainer((prevState) => !prevState) : null
+      }}
       className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container' }
     >
       <div className='channel-search__result-user'>
@@ -45,7 +52,8 @@ const SearchResult = ({ channel, focusedId, type, setChannel }) => {
   );
 };
 
-const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, setChannel }) => {
+const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, setChannel, setToggleContainer }) => {
+
   return (
     <div className='channel-search__results'>
       <p className='channel-search__results-header'>Channels</p>
@@ -66,6 +74,7 @@ const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, set
             key={i}
             setChannel={setChannel}
             type='channel'
+            setToggleContainer={setToggleContainer}
           />
         ))
       )}
@@ -87,6 +96,7 @@ const ResultsDropdown = ({ teamChannels, directChannels, focusedId, loading, set
             key={i}
             setChannel={setChannel}
             type='user'
+            setToggleContainer={setToggleContainer}
           />
         ))
       )}
