@@ -1618,7 +1618,11 @@ div.rta__autocomplete.str-chat__emojisearch {
   .channel-preview__item.multi {
     width: 80%;
   }
-  
+
+  .channel-search__results {
+    top: 100%;
+    left: 5%;
+  }
 }
 
 @media screen and (max-width: 650px) {
