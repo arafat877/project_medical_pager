@@ -12,10 +12,10 @@ import './App.css';
 
 const cookies = new Cookies();
 const apiKey =  'e6nfz3p5c2qb';
-const userId = cookies.get('userId') || 'adrianhajdin';
-const username = cookies.get('username') || 'adrianhajdin';
-const fullName = cookies.get('fullName') || 'adrianhajdin';
-const userToken = cookies.get('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRyaWFuaGFqZGluIn0._zEuN5lihKojvwOpvA62sVH_L7vU7Ph8W7lvfdk4lfc';
+const userId = cookies.get('userId');
+const username = cookies.get('username');
+const fullName = cookies.get('fullName');
+const userToken = cookies.get('token');
 const hashedPassword = cookies.get('hashedPassword');
 const isAuth = cookies.get('isAuth');
 
