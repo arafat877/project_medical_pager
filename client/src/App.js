@@ -18,10 +18,11 @@ const fullName = cookies.get('fullName');
 const userToken = cookies.get('token');
 const hashedPassword = cookies.get('hashedPassword');
 const isAuth = cookies.get('isAuth');
+const phoneNumber = cookies.get('phoneNumber');
 
 const client = StreamChat.getInstance(apiKey);
 
-if (isAuth) client.connectUser({ id: userId, name: username, fullName, image: getRandomImage(), hashedPassword }, userToken); 
+if (isAuth) client.connectUser({ id: userId, name: username, fullName, image: getRandomImage(), hashedPassword, phoneNumber }, userToken); 
 
 const App = () => {
   const [createType, setCreateType] = useState('');

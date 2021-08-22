@@ -2,17 +2,20 @@ const { connect } = require('getstream');
 const bcrypt = require('bcrypt');
 const StreamChat = require('stream-chat').StreamChat;
 const crypto = require('crypto');
+require('dotenv').config()
 
-// Define values. 
-const api_key = 'e6nfz3p5c2qb' 
-const api_secret = 'rfus6h6xq2y5gf9m9jkf4gqrcm282y9efzqtyw2a5r37targmuf9zgp764hasqe9' 
-const app_id = '1136741' 
+const accountSid = process.env.TWILIO_ACCOUNT_SID; // Your Account SID from www.twilio.com/console
+const authToken = process.env.TWILIO_AUTH_TOKEN;   // Your Auth Token from www.twilio.com/console
+const twilioClient = require('twilio')(accountSid, authToken);
+
+const api_key = process.env.STREAM_API_KEY;
+const api_secret = process.env.STREAM_API_SECRET;
+const app_id = process.env.STREAM_APP_ID 
 
 const login = async (req, res) => {
     try {
         const { username, password } = req.body;
         
-        // Initialize a Server Client 
         const serverClient = connect(api_key, api_secret, app_id); 
         const client = StreamChat.getInstance(api_key, api_secret); 
 
@@ -25,6 +28,15 @@ const login = async (req, res) => {
         const token = serverClient.createUserToken(users[0].id); 
 
         if(success) {
+            // twilioClient.messages 
+            // .create({ 
+            //     body: 'You have successfully logged in.',  
+            //     messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
+            //     to: '+385916114297' 
+            // }) 
+            // .then(message => console.log(message.sid)) 
+            // .done();
+
             res.status(200).json({ token, fullName: users[0].fullName, username, userId: users[0].id });
         } else {
             res.status(400).json({ message: "Wrong password" });
@@ -36,24 +48,27 @@ const login = async (req, res) => {
 
 const signup = async (req, res) => { 
     try {
-        const { fullName, username, password } = req.body;
+        const { fullName, username, password, phoneNumber } = req.body;
 
         const userId = crypto.randomBytes(20).toString('hex');
         console.log(userId)
         
-        // Initialize a Server Client 
         const serverClient = connect(api_key, api_secret, app_id); 
-        // const client = StreamChat.getInstance(api_key, api_secret); 
 
-        // Encrypt a password
         const hashedPassword = await bcrypt.hash(password, 10);
-        // Create a token
+
         const token = serverClient.createUserToken(userId); 
 
-        console.log(token);
-        console.log(hashedPassword);
-    
-        res.status(200).json({ token, fullName, username, userId, hashedPassword });
+        twilioClient.messages 
+            .create({ 
+                body: 'You have successfully created an account.',  
+                messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
+                to: phoneNumber 
+            }) 
+            .then(message => console.log(message.sid)) 
+            .done();
+
+        res.status(200).json({ token, fullName, username, userId, hashedPassword, phoneNumber });
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: error });

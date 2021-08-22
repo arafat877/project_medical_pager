@@ -29,14 +29,15 @@ const NewAuth = () => {
     e.preventDefault();
 
     if (isSignup) {
-      axios.post('http://localhost:5000/auth/signup', { fullName: form.fullName, username: form.username, password: form.password })
-      .then(({ data: { token, fullName, username, userId, hashedPassword }}) => {
+      axios.post('http://localhost:5000/auth/signup', { fullName: form.fullName, username: form.username, password: form.password, phoneNumber: form.phoneNumber })
+      .then(({ data: { token, fullName, username, userId, hashedPassword, phoneNumber }}) => {
         const cookies = new Cookies();
         cookies.set('token', token, { path: '/' });
         cookies.set('username', username, { path: '/' });
         cookies.set('fullName', fullName, { path: '/' });
         cookies.set('userId', userId, { path: '/' });
         cookies.set('isAuth', true, { path: '/' });
+        cookies.set('phoneNumber', phoneNumber, { path: '/' });
         cookies.set('hashedPassword', hashedPassword, { path: '/' });
         // cookies.set('image', 'https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png', { path: '/' });
 
@@ -79,6 +80,7 @@ const NewAuth = () => {
           <Grid container spacing={2}>
             { isSignup && <Input name="fullName" label="Full Name" handleChange={handleChange} autoFocus /> }
             <Input name="username" label="Username" handleChange={handleChange} />
+            { isSignup && <Input name="phoneNumber" label="Phone Number" handleChange={handleChange} type="text" /> }
             <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
             { isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" /> }
           </Grid>
