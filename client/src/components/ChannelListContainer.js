@@ -3,12 +3,21 @@ import { ChannelList } from "stream-chat-react";
 
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
 import HospitalIcon from "../assets/hospital.png";
+import LogoutIcon from "../assets/logout.png";
+import Cookies from 'universal-cookie';
 
-const SideBar = () => (
+const cookies = new Cookies();
+
+const SideBar = ({ logout }) => (
   <div className="channel-list__sidebar">
     <div className="channel-list__sidebar__icon1">
       <div className="icon1__inner">
         <img src={HospitalIcon} alt="Hospital" width="30" />
+      </div>
+    </div>
+    <div className="channel-list__sidebar__icon2">
+      <div className="icon1__inner">
+        <img src={LogoutIcon} alt="Logout" width="30" onClick={logout} />
       </div>
     </div>
   </div>
@@ -28,10 +37,22 @@ const customChannelMessagingFilter = (channels) => {
   return channels.filter((channel) => channel.type === "messaging");
 };
 
+const logout = () => {
+  cookies.remove('userId');
+  cookies.remove('username');
+  cookies.remove('fullName');
+  cookies.remove('token');
+  cookies.remove('hashedPassword');
+  cookies.remove('isAuth');
+  cookies.remove('phoneNumber');
+
+  window.location.reload()
+}
+
 const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing, setToggleContainer }) => {
   return (
     <>
-      <SideBar />
+      <SideBar logout={logout} />
       <div className="channel-list__list__wrapper">
         <CompanyHeader />
         <ChannelSearch setToggleContainer={setToggleContainer ? setToggleContainer : null} />
