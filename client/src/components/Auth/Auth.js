@@ -136,38 +136,78 @@ const NewAuth = () => {
 
     <div className="auth__form-container">
       <div className="auth__form-container_fields">
-        <div className="auth__form-container_fields-logo">
-          <img src={hospitalIcon} alt="hospital_logo" />
-          {/* <h2>Medical Pager</h2> */}
-        </div>
         <div className="auth__form-container_fields-content">
-          <p>Sign Up</p>
-          <form>
+          <p>{isSignup ? "Sign up" : "Sign in"}</p>
+          <form onSubmit={handleSubmit}>
+            {isSignup && (
+              <div className="auth__form-container_fields-content_input">
+                <label htmlFor="fullname">Full Name</label>
+                <input
+                  name="fullName"
+                  type="text"
+                  placeholder="John Doe"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
             <div className="auth__form-container_fields-content_input">
-              <label>Full Name</label>
-              <input type="text" placeholder="Enter your full name" />
+              <label htmlFor="Username">Username</label>
+              <input
+                name="username"
+                type="text"
+                placeholder="@john"
+                onChange={handleChange}
+                required
+              />
             </div>
+            {isSignup && (
+              <div className="auth__form-container_fields-content_input">
+                <label htmlFor="phoneNumber">Phone Number</label>
+                <input
+                  name="phoneNumber"
+                  type="number"
+                  placeholder="123456789"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
             <div className="auth__form-container_fields-content_input">
-              <label>Username</label>
-              <input type="text" placeholder="Enter your username" />
+              <label htmlFor="password">Password</label>
+              <input
+                name="password"
+                type="password"
+                placeholder="***"
+                onChange={handleChange}
+                required
+              />
             </div>
-            <div className="auth__form-container_fields-content_input">
-              <label>Phone Number</label>
-              <input type="number" placeholder="Enter your phone number" />
-            </div>
-            <div className="auth__form-container_fields-content_input">
-              <label>Password</label>
-              <input type="password" placeholder="Enter your password" />
-            </div>
-            <div className="auth__form-container_fields-content_input">
-              <label>Confirm Password</label>
-              <input type="password" placeholder="Enter confirm password" />
-            </div>
+            {isSignup && (
+              <div className="auth__form-container_fields-content_input">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="***"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
 
             <div className="auth__form-container_fields-content_button">
-              <button>Sign Up</button>
+              <button>{isSignup ? "Sign Up" : "Sign In"}</button>
             </div>
           </form>
+          <div className="auth__form-container_fields-account">
+            <p>
+              {isSignup ? "Already have an account?" : "Don't have an account?"}
+              <span onClick={switchMode}>
+                {isSignup ? " Sign in" : " Sign up"}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
       <div className="auth__form-container_image">
