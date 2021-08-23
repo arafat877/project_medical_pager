@@ -61,6 +61,7 @@ body {
 .auth__form-container_fields-content_input {
   display: flex;
   flex-direction: column;
+  position: relative;
 
   margin: 1rem 0rem;
 }
@@ -100,6 +101,13 @@ body {
 .auth__form-container_fields-content_input input:active {
   box-shadow: 0px 0px 0px 1.5px #005fff;
   border-color: #005fff;
+}
+
+.auth__form-container_fields-content_input-password {
+  position: absolute;
+  right: 13%;
+  top: 50%;
+  cursor: pointer;
 }
 
 .auth__form-container_fields-content_button {
@@ -150,6 +158,10 @@ body {
     flex-direction: column-reverse;
   }
 
+  .auth__form-container_fields {
+    justify-content: flex-start;
+  }
+
   .auth__form-container_image {
     height: 100px;
     flex: none;
@@ -168,6 +180,10 @@ body {
 
   .auth__form-container_fields-content_input input {
     width: 95%;
+  }
+
+  .auth__form-container_fields-content_input-password {
+    right: 3%;
   }
 }
 

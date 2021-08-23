@@ -16,7 +16,8 @@ import useStyles from "./styles";
 import Input from "./Input";
 import Cookies from "universal-cookie";
 import signinImage from "../../assets/signin.gif";
-import hospitalIcon from "../../assets/hospital.png";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 const initialState = {
   fullName: "",
@@ -177,18 +178,31 @@ const NewAuth = () => {
               <label htmlFor="password">Password</label>
               <input
                 name="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="***"
                 onChange={handleChange}
                 required
               />
+              <div className="auth__form-container_fields-content_input-password">
+                {showPassword ? (
+                  <VisibilityOffIcon
+                    onClick={handleShowPassword}
+                    style={{ color: "#05245a" }}
+                  />
+                ) : (
+                  <VisibilityIcon
+                    onClick={handleShowPassword}
+                    style={{ color: "#05245a" }}
+                  />
+                )}
+              </div>
             </div>
             {isSignup && (
               <div className="auth__form-container_fields-content_input">
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input
                   name="confirmPassword"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="***"
                   onChange={handleChange}
                   required
