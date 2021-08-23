@@ -15,7 +15,7 @@ import axios from "axios";
 import useStyles from "./styles";
 import Input from "./Input";
 import Cookies from "universal-cookie";
-import signinImage from "../../assets/signin.gif";
+import signinImage from "../../assets/signup.jpg";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 

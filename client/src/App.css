@@ -27,6 +27,7 @@ body {
   justify-content: center;
 
   padding: 2rem;
+  background: #005fff;
 }
 
 .auth__form-container_image {
@@ -49,6 +50,7 @@ body {
   box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
   border-radius: 5px;
   transition: 0.8s ease;
+  background: #fff;
 }
 
 .auth__form-container_fields-content p {
