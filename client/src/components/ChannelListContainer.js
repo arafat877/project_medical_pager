@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChannelList } from "stream-chat-react";
+import { useChatContext } from 'stream-chat-react';
 
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
 import HospitalIcon from "../assets/hospital.png";
@@ -49,7 +50,13 @@ const logout = () => {
   window.location.reload()
 }
 
+
 const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing, setToggleContainer }) => {
+  const { client } = useChatContext();
+
+  const filters =  { members: { $in: [client.userID] } }
+
+  
   return (
     <>
       <SideBar logout={logout} />
@@ -57,6 +64,7 @@ const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing, setTog
         <CompanyHeader />
         <ChannelSearch setToggleContainer={setToggleContainer ? setToggleContainer : null} />
         <ChannelList
+          filters={filters}
           channelRenderFilterFn={customChannelTeamFilter}
           List={(listProps) => (
             <TeamChannelList
@@ -81,6 +89,7 @@ const ChannelListContent = ({ setCreateType, setIsCreating, setIsEditing, setTog
         <ChannelList
           channelRenderFilterFn={customChannelMessagingFilter}
           setActiveChannelOnMount={false}
+          filters={filters}
           List={(listProps) => (
             <TeamChannelList
               {...listProps}

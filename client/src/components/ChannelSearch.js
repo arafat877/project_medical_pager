@@ -25,7 +25,7 @@ const ChannelSearch = ({setToggleContainer}) => {
 
   const getChannels = async (text) => {
     try {
-      const channelResponse = client.queryChannels({ type: 'team', name: { $autocomplete: text } });
+      const channelResponse = client.queryChannels({ type: 'team', name: { $autocomplete: text }, members: { $in: [client.userID] } });
       const userResponse = client.queryUsers({ id: { $ne: client.userID }, name: { $autocomplete: text } });
       const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
       
