@@ -29,13 +29,13 @@ const login = async (req, res) => {
 
         if(success) {
             // twilioClient.messages 
-            // .create({ 
-            //     body: 'You have successfully logged in.',  
-            //     messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
-            //     to: '+385916114297' 
-            // }) 
-            // .then(message => console.log(message.sid)) 
-            // .done();
+            //     .create({ 
+            //         body: 'You have a new message',  
+            //         messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
+            //         to: '+385916114297' 
+            //     }) 
+            //     .then(message => console.log(message.sid)) 
+            //     .done();
 
             res.status(200).json({ token, fullName: users[0].fullName, username, userId: users[0].id });
         } else {
