@@ -1,15 +1,16 @@
 const express = require('express');
-const authRoutes = require ('./routes/auth.js');
 const cors = require('cors');
 
+const authRoutes = require ('./routes/auth.js');
+
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (_, res) => res.send('Hello World!'));
 
 app.use('/auth', authRoutes);
 

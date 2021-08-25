@@ -10,4 +10,4 @@ export { default as TeamChannelList } from './TeamChannelList';
 export { default as TeamChannelPreview } from './TeamChannelPreview';
 export { default as TeamMessage } from './TeamMessage';
 export { default as UserList } from './UserList';
-export { default as Auth } from './Auth/Auth';
+export { default as Auth } from './Auth';

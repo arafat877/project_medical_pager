@@ -59,14 +59,14 @@ const signup = async (req, res) => {
 
         const token = serverClient.createUserToken(userId); 
 
-        twilioClient.messages 
-            .create({ 
-                body: 'You have successfully created an account.',  
-                messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
-                to: phoneNumber 
-            }) 
-            .then(message => console.log(message.sid)) 
-            .done();
+        // twilioClient.messages 
+        //     .create({ 
+        //         body: 'You have successfully created an account.',  
+        //         messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
+        //         to: phoneNumber 
+        //     }) 
+        //     .then(message => console.log(message.sid)) 
+        //     .done();
 
         res.status(200).json({ token, fullName, username, userId, hashedPassword, phoneNumber });
     } catch (error) {

@@ -44,7 +44,6 @@ const logout = () => {
   cookies.remove('fullName');
   cookies.remove('token');
   cookies.remove('hashedPassword');
-  cookies.remove('isAuth');
   cookies.remove('phoneNumber');
 
   window.location.reload()

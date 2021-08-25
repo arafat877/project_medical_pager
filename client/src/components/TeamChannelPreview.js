@@ -6,7 +6,7 @@ const TeamChannelPreview = ({ channel, setActiveChannel, setIsCreating, setIsEdi
 
   const ChannelPreview = () => (
     <p className='channel-preview__item'>
-      # {channel?.data?.name || channel?.data?.id || 'random'}
+      # {channel?.data?.name || channel?.data?.id }
     </p>
   );
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
-import signinImage from "../../assets/signup.jpg";
+import signinImage from "../assets/signup.jpg";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
@@ -11,7 +11,11 @@ const initialState = {
   username: "",
   password: "",
   confirmPassword: "",
+  phoneNumber: "",
+  avatarURL: "",
 };
+
+const cookies = new Cookies();
 
 const NewAuth = () => {
   const [form, setForm] = useState(initialState);
@@ -29,67 +33,33 @@ const NewAuth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isSignup) {
-      axios
-        .post("http://localhost:5000/auth/signup", {
-          fullName: form.fullName,
-          username: form.username,
-          password: form.password,
-          phoneNumber: form.phoneNumber,
-        })
-        .then(
-          ({
-            data: {
-              token,
-              fullName,
-              username,
-              userId,
-              hashedPassword,
-              phoneNumber,
-            },
-          }) => {
-            const cookies = new Cookies();
-            cookies.set("token", token, { path: "/" });
-            cookies.set("username", username, { path: "/" });
-            cookies.set("fullName", fullName, { path: "/" });
-            cookies.set("userId", userId, { path: "/" });
-            cookies.set("isAuth", true, { path: "/" });
-            cookies.set("phoneNumber", phoneNumber, { path: "/" });
-            cookies.set("hashedPassword", hashedPassword, { path: "/" });
-            // cookies.set('image', 'https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png', { path: '/' });
+    const { fullName, username, password,  phoneNumber, avatarURL } = form;    
 
-            window.location.reload();
+    const URL = "https://medical-pagerdemo.herokuapp.com/auth";
+    // const URL = "https://medical-pager.netlify.app/auth";
+
+    axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, { username, password, fullName, phoneNumber, avatarURL })
+      .then(({ data: { token, userId, fullName, username, hashedPassword }}) => {
+          cookies.set("token", token);
+          cookies.set("username", username);
+          cookies.set("fullName", fullName);
+          cookies.set("userId", userId);
+
+          if(isSignup) {
+            cookies.set("phoneNumber", phoneNumber);
+            cookies.set("avatarURL", avatarURL);
+            cookies.set("hashedPassword", hashedPassword);
           }
-        )
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      axios
-        .post("http://localhost:5000/auth/login", {
-          username: form.username,
-          password: form.password,
-        })
-        .then(({ data: { token, fullName, username, userId } }) => {
-          const cookies = new Cookies();
-          cookies.set("token", token, { path: "/" });
-          cookies.set("username", username, { path: "/" });
-          cookies.set("fullName", fullName, { path: "/" });
-          cookies.set("userId", userId, { path: "/" });
-          cookies.set("isAuth", true, { path: "/" });
-          // cookies.set('hashedPassword', hashedPassword, { path: '/' });
-          // cookies.set('image', 'https://www.kindpng.com/picc/m/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png', { path: '/' });
 
           window.location.reload();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+        }
+      )
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   return (
     <div className="auth__form-container">
@@ -126,6 +96,18 @@ const NewAuth = () => {
                   name="phoneNumber"
                   type="number"
                   placeholder="123456789"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            )}
+            {isSignup && (
+              <div className="auth__form-container_fields-content_input">
+                <label htmlFor="phoneNumber">Avatar URL</label>
+                <input
+                  name="avatarURL"
+                  type="text"
+                  placeholder="https://avatarurls/avatar.png"
                   onChange={handleChange}
                   required
                 />
