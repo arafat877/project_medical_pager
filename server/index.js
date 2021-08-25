@@ -17,48 +17,29 @@ app.use(express.urlencoded());
 app.get('/', (_, res) => res.send('Hello World!'));
 
 app.post('/', (req, res) => {
-    if(res || req) {
-        console.log('================================= REQ BODY USER =================================')
-        console.log(req.body)
+    const { message, user: sender, type, members } = req.body;
+
+    if(type === 'message.new') {
+        members
+            .filter((member) => member.user_id !== sender.id)
+            .forEach(({ user }) => {
+                if(!user.online) {
+                    twilioClient.messages.create({ 
+                        body: `You have a new message from ${message.user.fullName} - ${message.text}`,  
+                        messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
+                        to: user.phoneNumber
+                    })
+                    .then(() => console.log('Message sent to: ', user.fullName))
+                    .catch((e) =>  console.log(e));
+                }
+        });
+
+        return res.status(200).send("OK");
     }
-    twilioClient.messages.create({ 
-        body: 'You have a new message.',  
-        messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
-        to: '385916114297' 
-    })
-    .then(() => res.status(200).send("OK"))
-    .catch((e) => {
-        console.log(e);
-        res.status(500).send("Error");
-    })
+
+    return res.send('Not a new message request.');
 });
 
-// console.log('here');
-// let body = '';
-
-// req.on("data", (chunk) => {
-//     console.log('Inside req.on(data)', { chunk });
-//    body += chunk;
-// });
-
-// // Payload from Stream
-// req.on("end", () => {
-//     console.log('Inside req.on(end)');
-//     let parsedBody = JSON.parse(body);
-
-//     // Verifying there is a message in the payload
-//     if(parsedBody.message == undefined) return;
-
-//     console.log('before message sent');
-//     // Here you can send an email, integrate an SMS service, or perform any other desired actions based on your Webhook events data
-//     twilioClient.messages.create({ 
-//         body: 'You have a new message.',  
-//         messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
-//         to: '+385916114297' 
-//     }).then(() => res.status(200).send("OK")).done();
-//    });
-
-//    res.send('Done');
 app.use('/auth', authRoutes);
 
 app.listen(PORT, () => console.log(`Example app listening at http://localhost:${PORT}`));
