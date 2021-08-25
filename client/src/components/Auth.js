@@ -94,7 +94,6 @@ const NewAuth = () => {
                 <label htmlFor="phoneNumber">Phone Number</label>
                 <input
                   name="phoneNumber"
-                  type="number"
                   placeholder="123456789"
                   onChange={handleChange}
                   required
