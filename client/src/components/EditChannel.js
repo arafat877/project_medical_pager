@@ -7,6 +7,7 @@ import { CloseCreateChannel } from '../assets';
 const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   const handleChange = (event) => {
     event.preventDefault();
+    
     setChannelName(event.target.value);
   };
 

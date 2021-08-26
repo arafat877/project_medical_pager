@@ -2,11 +2,6 @@ const { connect } = require('getstream');
 const bcrypt = require('bcrypt');
 const StreamChat = require('stream-chat').StreamChat;
 const crypto = require('crypto');
-require('dotenv').config()
-
-const accountSid = process.env.TWILIO_ACCOUNT_SID; // Your Account SID from www.twilio.com/console
-const authToken = process.env.TWILIO_AUTH_TOKEN;   // Your Auth Token from www.twilio.com/console
-const twilioClient = require('twilio')(accountSid, authToken);
 
 const api_key = process.env.STREAM_API_KEY;
 const api_secret = process.env.STREAM_API_SECRET;
@@ -28,15 +23,6 @@ const login = async (req, res) => {
         const token = serverClient.createUserToken(users[0].id); 
 
         if(success) {
-            // twilioClient.messages 
-            //     .create({ 
-            //         body: 'You have a new message',  
-            //         messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
-            //         to: '+385916114297' 
-            //     }) 
-            //     .then(message => console.log(message.sid)) 
-            //     .done();
-
             res.status(200).json({ token, fullName: users[0].fullName, username, userId: users[0].id });
         } else {
             res.status(400).json({ message: "Wrong password" });
@@ -58,15 +44,6 @@ const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const token = serverClient.createUserToken(userId); 
-
-        // twilioClient.messages 
-        //     .create({ 
-        //         body: 'You have successfully created an account.',  
-        //         messagingServiceSid: 'MG8893dd312da357e6883c026c93a2bb1a',      
-        //         to: phoneNumber 
-        //     }) 
-        //     .then(message => console.log(message.sid)) 
-        //     .done();
 
         res.status(200).json({ token, fullName, username, userId, hashedPassword, phoneNumber });
     } catch (error) {

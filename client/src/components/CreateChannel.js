@@ -20,21 +20,16 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   );
 };
 
-const CreateChannel = ({ createType, filters, setIsCreating }) => {
+const CreateChannel = ({ createType, setIsCreating }) => {
   const { client, setActiveChannel } = useChatContext();
-
-  const [channelName, setChannelName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([client.userID || '']);
+  const [channelName, setChannelName] = useState('');
 
   const createChannel = async (event) => {
     event.preventDefault();
 
     try {
-      const newChannel = await client.channel(createType, channelName, {
-        name: channelName,
-        members: selectedUsers,
-        demo: 'team',
-      });
+      const newChannel = await client.channel(createType, channelName, { name: channelName, members: selectedUsers });
 
       await newChannel.watch();
 
@@ -54,7 +49,7 @@ const CreateChannel = ({ createType, filters, setIsCreating }) => {
         <CloseCreateChannel setIsCreating={setIsCreating} />
       </div>
       {createType === 'team' && <ChannelNameInput channelName={channelName} setChannelName={setChannelName} />}
-      <UserList filters={filters} setSelectedUsers={setSelectedUsers} />
+      <UserList setSelectedUsers={setSelectedUsers} />
       <div className='create-channel__button-wrapper' onClick={createChannel}>
         <p>{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</p>
       </div>

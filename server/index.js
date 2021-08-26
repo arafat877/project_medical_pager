@@ -6,6 +6,8 @@ const authRoutes = require ('./routes/auth.js');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+require('dotenv').config()
+
 const accountSid = process.env.TWILIO_ACCOUNT_SID; // Your Account SID from www.twilio.com/console
 const authToken = process.env.TWILIO_AUTH_TOKEN;   // Your Auth Token from www.twilio.com/console
 const twilioClient = require('twilio')(accountSid, authToken);
@@ -16,6 +18,7 @@ app.use(express.urlencoded());
 
 app.get('/', (_, res) => res.send('Hello World!'));
 
+// SMS Webhook
 app.post('/', (req, res) => {
     const { message, user: sender, type, members } = req.body;
 

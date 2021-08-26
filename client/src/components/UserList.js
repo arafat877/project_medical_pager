@@ -8,7 +8,6 @@ const ListContainer = ({ children }) => {
     <div className='user-list__container'>
       <div className='user-list__header'>
         <p>User</p>
-        <p>Last Active</p>
         <p>Invite</p>
       </div>
       {children}
@@ -16,25 +15,8 @@ const ListContainer = ({ children }) => {
   );
 };
 
-const UserItem = ({ index, setSelectedUsers, user }) => {
+const UserItem = ({ setSelectedUsers, user }) => {
   const [selected, setSelected] = useState(false);
-
-  const getLastActive = (i) => {
-    switch (i) {
-      case 0:
-        return '12 min ago';
-      case 1:
-        return '27 min ago';
-      case 2:
-        return '6 hours ago';
-      case 3:
-        return '14 hours ago';
-      case 4:
-        return 'Yesterday';
-      default:
-        return 'Yesterday';
-    }
-  };
 
   const handleClick = () => {
     if (selected) {
@@ -51,7 +33,6 @@ const UserItem = ({ index, setSelectedUsers, user }) => {
         <Avatar image={user.image} name={user.fullName || user.id} size={32} />
         <p className='user-item__name'>{user.fullName || user.id}</p>
       </div>
-      <p className='user-item__last-active'>{getLastActive(index)}</p>
       {selected ? <InviteIcon /> : <div className='user-item__invite-empty' />}
     </div>
   );
@@ -68,6 +49,7 @@ const UserList = ({ filters, setSelectedUsers }) => {
   useEffect(() => {
     const getUsers = async () => {
       if (loading) return;
+      
       setLoading(true);
 
       try {

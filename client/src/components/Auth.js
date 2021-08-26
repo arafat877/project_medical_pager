@@ -17,7 +17,7 @@ const initialState = {
 
 const cookies = new Cookies();
 
-const NewAuth = () => {
+const Auth = () => {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +36,7 @@ const NewAuth = () => {
     const { fullName, username, password,  phoneNumber, avatarURL } = form;    
 
     const URL = "https://medical-pagerdemo.herokuapp.com/auth";
-    // const URL = "https://medical-pager.netlify.app/auth";
+    // const URL = "http://localhost:5000/auth";
 
     axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, { username, password, fullName, phoneNumber, avatarURL })
       .then(({ data: { token, userId, fullName, username, hashedPassword }}) => {
@@ -122,17 +122,9 @@ const NewAuth = () => {
                 required
               />
               <div className="auth__form-container_fields-content_input-password">
-                {showPassword ? (
-                  <VisibilityOffIcon
-                    onClick={handleShowPassword}
-                    style={{ color: "#05245a" }}
-                  />
-                ) : (
-                  <VisibilityIcon
-                    onClick={handleShowPassword}
-                    style={{ color: "#05245a" }}
-                  />
-                )}
+                {showPassword 
+                  ? <VisibilityOffIcon onClick={handleShowPassword} style={{ color: "#05245a" }} />
+                  : <VisibilityIcon onClick={handleShowPassword} style={{ color: "#05245a" }} />}
               </div>
             </div>
             {isSignup && (
@@ -147,7 +139,6 @@ const NewAuth = () => {
                 />
               </div>
             )}
-
             <div className="auth__form-container_fields-content_button">
               <button>{isSignup ? "Sign Up" : "Sign In"}</button>
             </div>
@@ -169,4 +160,4 @@ const NewAuth = () => {
   );
 };
 
-export default NewAuth;
+export default Auth;
